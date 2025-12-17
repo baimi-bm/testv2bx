@@ -379,8 +379,8 @@ github.com/baidubce/bce-sdk-go/http
 github.com/baidubce/bce-sdk-go/services/dns
 github.com/baidubce/bce-sdk-go/util
 github.com/baidubce/bce-sdk-go/util/log
-# github.com/beevik/ntp v1.4.4-0.20240716062501-06ef196b89ec
-## explicit; go 1.17
+# github.com/beevik/ntp v1.5.0
+## explicit; go 1.24.0
 github.com/beevik/ntp
 # github.com/benbjohnson/clock v1.3.0
 ## explicit; go 1.15

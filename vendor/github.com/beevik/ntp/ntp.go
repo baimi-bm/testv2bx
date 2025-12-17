@@ -236,6 +236,11 @@ type QueryOptions struct {
 	// transmitted and to process NTP responses after they arrive.
 	Extensions []Extension
 
+	// GetSystemTime is a callback used to override the default method of
+	// obtaining the local system time during time synchronization. If not
+	// specified, time.Now is used.
+	GetSystemTime func() time.Time
+
 	// Dialer is a callback used to override the default UDP network dialer.
 	// The localAddress is directly copied from the LocalAddress field
 	// specified in QueryOptions. It may be the empty string or a host address
@@ -495,6 +500,9 @@ func getTime(address string, opt *QueryOptions) (*header, ntpTime, error) {
 	if opt.Dialer == nil {
 		opt.Dialer = defaultDialer
 	}
+	if opt.GetSystemTime == nil {
+		opt.GetSystemTime = time.Now
+	}
 
 	// Compose a conforming host:port remote address string if the address
 	// string doesn't already contain a port.
@@ -566,7 +574,7 @@ func getTime(address string, opt *QueryOptions) (*header, ntpTime, error) {
 	appendMAC(&xmitBuf, opt.Auth, authKey)
 
 	// Transmit the query and keep track of when it was transmitted.
-	xmitTime := time.Now()
+	xmitTime := opt.GetSystemTime()
 	_, err = con.Write(xmitBuf.Bytes())
 	if err != nil {
 		return nil, 0, err
@@ -581,11 +589,10 @@ func getTime(address string, opt *QueryOptions) (*header, ntpTime, error) {
 	// Keep track of the time the response was received. As of go 1.9, the
 	// time package uses a monotonic clock, so delta will never be less than
 	// zero for go version 1.9 or higher.
-	delta := time.Since(xmitTime)
-	if delta < 0 {
-		delta = 0
+	recvTime := opt.GetSystemTime()
+	if recvTime.Sub(xmitTime) < 0 {
+		recvTime = xmitTime
 	}
-	recvTime := xmitTime.Add(delta)
 
 	// Parse the response header.
 	recvBuf = recvBuf[:recvBytes]
