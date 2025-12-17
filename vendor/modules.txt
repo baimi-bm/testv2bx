@@ -217,7 +217,7 @@ github.com/anytls/sing-anytls/pipe
 github.com/anytls/sing-anytls/session
 github.com/anytls/sing-anytls/skiplist
 github.com/anytls/sing-anytls/util
-# github.com/apernet/hysteria/core/v2 v2.6.4
+# github.com/apernet/hysteria/core/v2 v2.6.5
 ## explicit; go 1.23
 github.com/apernet/hysteria/core/v2/errors
 github.com/apernet/hysteria/core/v2/internal/congestion
@@ -242,7 +242,7 @@ github.com/apernet/hysteria/extras/v2/outbounds/tinydoh
 github.com/apernet/hysteria/extras/v2/sniff
 github.com/apernet/hysteria/extras/v2/sniff/internal/quic
 github.com/apernet/hysteria/extras/v2/utils
-# github.com/apernet/quic-go v0.54.1-0.20250907230547-eb32f8aec5e2
+# github.com/apernet/quic-go v0.54.1-0.20251024023933-5e0818a71079
 ## explicit; go 1.23
 github.com/apernet/quic-go
 github.com/apernet/quic-go/congestion
