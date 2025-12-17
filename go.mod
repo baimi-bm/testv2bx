@@ -22,7 +22,7 @@ require (
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.19.0
 	github.com/vmihailenco/msgpack/v5 v5.4.1
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.27.1
 	golang.org/x/crypto v0.44.0
 	golang.org/x/sys v0.38.0
 )
